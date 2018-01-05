@@ -1,0 +1,20 @@
+// Code generated from embed_tmp.go.txt DO NOT EDIT.
+
+package main
+
+import "goddbench"
+
+func LoadList() []goddbench.Data {
+	return List
+}
+
+var List = []goddbench.Data{
+{{range GenN .Len}}{
+	{{printf "%#v" .Bool}},
+	{{printf "%#v" .Int}},
+	{{printf "%#v" .Float}},
+	{{printf "%#v" .String}},
+	goddbench.TimeParse("{{TimeString .Time}}"),
+},
+{{end}}
+}

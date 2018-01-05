@@ -1,0 +1,25 @@
+package main
+
+import (
+	"goddbench"
+	"fmt"
+	"net/http"
+	"testing"
+
+	"google.golang.org/appengine"
+)
+
+func main() {
+	http.HandleFunc("/", handler)
+	appengine.Main()
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	res := testing.Benchmark(func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			LoadList()
+		}
+	})
+	w.Header().Set("Content-Type", "text/plain")
+	fmt.Fprintf(w, "{{.Name}}\t%s\t%s\t%s\n", res.String(), res.MemString(), goddbench.Hash(List))
+}

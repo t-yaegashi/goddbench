@@ -1,0 +1,22 @@
+// Code generated from json_tmp.go.txt DO NOT EDIT.
+
+package main
+
+import (
+	"goddbench"
+	"encoding/json"
+	"os"
+)
+
+func LoadList() []goddbench.Data {
+	file, err := os.Open("list.json")
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	dec := json.NewDecoder(file)
+	dec.Decode(&List)
+	return List
+}
+
+var List []goddbench.Data

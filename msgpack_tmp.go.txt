@@ -1,0 +1,23 @@
+// Code generated from msgpack_tmp.go.txt DO NOT EDIT.
+
+package main
+
+import (
+	"goddbench"
+	"os"
+
+	"github.com/vmihailenco/msgpack"
+)
+
+func LoadList() []goddbench.Data {
+	file, err := os.Open("list.msgpack")
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	dec := msgpack.NewDecoder(file)
+	dec.Decode(&List)
+	return List
+}
+
+var List []goddbench.Data
